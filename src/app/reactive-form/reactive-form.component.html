@@ -1,11 +1,47 @@
-<form [formGroup]="userForm" class="bg-light border rounded">
+<form [formGroup]="userForm" (ngSubmit)="Onsubmit()" class="bg-light border rounded">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input formControlName="emailform" type="email" class="form-control" id="exampleInputEmail1">
+        <input 
+        formControlName="emailform"
+        type="email"
+        class="form-control"
+        [ngClass]="{'is-invalid': emailControlIsInvalid }"
+        [ngClass]="{'is-valid': emailControlIsValid }"
+        id="exampleInputEmail1">
+        <div class="invalid-feedback">
+            <ng-container *ngIf="emailControl.errors?.['required']">
+                Este campo es requerido
+            </ng-container>
+            <ng-container *ngIf="emailControl.errors?.['email']">
+                Este campo debe ser un email valido
+            </ng-container>
+        </div>
+        <div class="valid-feedback">
+            Email valido!
+        </div>
     </div>
+    
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input formControlName="passwordform" type="password" class="form-control" id="exampleInputPassword1">
+        <input 
+            formControlName="passwordform"
+            type="password"
+            class="form-control"
+            [ngClass]="{'is-invalid': passwordControlIsInvalid }"
+            [ngClass]="{'is-valid': passwordControlIsValid }"
+            id="exampleInputPassword1">
+            <div class="invalid-feedback">
+                <ng-container *ngIf="passwordControl.errors?.['required']">
+                    Este campo es requerido
+                </ng-container>
+                <ng-container *ngIf="passwordControl.errors?.['minlength']">
+                    El password debe contener al menos 6 caracteres
+                </ng-container>
+            </div>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button
+        [disabled] = "userForm.invalid"
+        type="submit" 
+        class="btn btn-primary"
+        >Enviar</button>
 </form>
