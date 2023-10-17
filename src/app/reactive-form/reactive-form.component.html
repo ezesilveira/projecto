@@ -5,8 +5,8 @@
         formControlName="emailform"
         type="email"
         class="form-control"
-        [ngClass]="{'is-invalid': emailControlIsInvalid }"
-        [ngClass]="{'is-valid': emailControlIsValid }"
+        [ngClass]="{'is-invalid': emailControlIsInvalid}"
+        [ngClass]="{'is-valid': emailControlIsValid}"
         id="exampleInputEmail1">
         <div class="invalid-feedback">
             <ng-container *ngIf="emailControl.errors?.['required']">
